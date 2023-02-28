@@ -9,7 +9,7 @@ async function writeToDB(dataToWrite) {
     }
 }
 
-async function deleteFromDB(id) {
+async function deleteFromDBById(id) {
     try {
         await deleteDoc(doc(db, "entries", id));
     } catch (err) {
@@ -17,7 +17,7 @@ async function deleteFromDB(id) {
     }
 }
 
-async function updateToDB(id) {
+async function updateToDBById(id) {
     try {
         await updateDoc(doc(db, "entries", id), {
             over: false
@@ -27,4 +27,4 @@ async function updateToDB(id) {
     }
 }
 
-export { writeToDB, deleteFromDB, updateToDB }
+export { writeToDB, deleteFromDBById, updateToDBById }

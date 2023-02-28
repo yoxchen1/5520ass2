@@ -51,7 +51,6 @@ export default function AddEntry({ navigation }) {
               style={styles.inputLine}
             />
         </View>
-
       </View>
 
     <View style={styles.buttonContainer}>
@@ -130,6 +129,7 @@ const styles = StyleSheet.create({
   inputNameStyle: {
     color: myColor.navicolor,
     fontSize: 18,
+    marginLeft: 10,
     fontWeight: 'bold',
     flex: 1,
   },

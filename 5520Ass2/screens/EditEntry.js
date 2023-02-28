@@ -4,13 +4,14 @@ import Card from '../components/Card';
 import Button from '../components/Button';
 import { myColor } from '../components/Color';
 import { MaterialIcons } from '@expo/vector-icons';
-import { deleteFromDB, updateToDB } from '../Firebase/firestoreHelper';
+import { deleteFromDBById, updateToDBById } from '../Firebase/firestoreHelper';
 
 export default function EditEntry({ navigation, route }) {
   console.log('route:',route);
   function cancelForm() {
     navigation.goBack()
   }
+
 
   return (
     <View style={styles.style}>
@@ -21,7 +22,7 @@ export default function EditEntry({ navigation, route }) {
         <Text style={styles.textStyle}>
           Description: {route.params.entry.name}
         </Text>
-        <View style={styles.buttonContainer}>
+        <View style={styles.buttonStyle}>
           <Button 
             buttonPressed={()=>{
               Alert.alert(
@@ -31,13 +32,13 @@ export default function EditEntry({ navigation, route }) {
                   {
                     text: "No", 
                     style: "cancel", 
-                    onPress: () => {}
+                    onPress: () => {console.log("No Pressed")}
                   },
                   {
                     text: 'Yes',
                     style: "confirm",
                     onPress: () => {
-                      deleteFromDB(route.params.entry.id);
+                      deleteFromDBById(route.params.entry.id);
                       cancelForm();
                     },
                   },
@@ -47,10 +48,10 @@ export default function EditEntry({ navigation, route }) {
             defaultStyle={styles.iconButton}
           >
             <MaterialIcons 
-            style={styles.button}
-            name="delete-outline" 
-            size={24} 
-            color={myColor.white} 
+              style={styles.button}
+              name="delete-outline" 
+              size={24} 
+              color={myColor.white} 
             />
           </Button>
           { route.params.entry.over &&  
@@ -69,7 +70,7 @@ export default function EditEntry({ navigation, route }) {
                     text: 'Yes',
                     style: "confirm",
                     onPress: () => {
-                      updateToDB(route.params.entry.id);
+                      updateToDBById(route.params.entry.id);
                       cancelForm();
                     },
                   },
@@ -106,7 +107,7 @@ const styles = StyleSheet.create({
     width: 80,
     margin: 10,
   },
-  buttonContainer: {
+  buttonStyle: {
     flexDirection: 'row',
     alignItems: 'center',
     marginTop: 5,

@@ -23,13 +23,14 @@ export default function App() {
           options={{ headerShown: false }} 
         />
         <Stack.Screen 
+          name="AddEntry" 
+          component={AddEntry} 
+          options={{title: 'Add Entry'}} 
+        />
+        <Stack.Screen 
           name="EditEntry" 
           component={EditEntry} 
           options={{title: 'Edit Entry'}} 
-        />
-        <Stack.Screen name="AddEntry" 
-          component={AddEntry} 
-          options={{title: 'Add Entry'}} 
         />
     </Stack.Navigator>
     </NavigationContainer>

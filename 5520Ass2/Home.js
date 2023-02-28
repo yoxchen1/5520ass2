@@ -44,7 +44,7 @@ export default function Home({ navigation }) {
         name="Home"
         screenOptions={{
         headerStyle: {backgroundColor:myColor.navicolor}, 
-        headerTitleStyle: {color:myColor.white, fontSize: 20}, 
+        headerTitleStyle: {color:myColor.white, fontSize: 18}, 
         headerTintColor: "#fff",
         headerTitleAlign: 'center',
         tabBarStyle: { position: 'absolute', 
@@ -72,9 +72,9 @@ export default function Home({ navigation }) {
                   defaultStyle={{marginHorizontal: 18}}
                   >
                     <MaterialCommunityIcons 
-                    name={iconAdd} 
-                    size={18} 
-                    color={myColor.white} 
+                      name={iconAdd} 
+                      size={18} 
+                      color={myColor.white} 
                     />
                   </Button>
                 )
@@ -84,27 +84,27 @@ export default function Home({ navigation }) {
             name="OverLimitEntries" 
             children={() => 
               <Entry 
-              entries={entries.filter(item => item.over === true)}
+                entries={entries.filter(item => item.over === true)}
               />}
             
             options={{
               title: 'Over-limit Entries', 
               tabBarIcon:({ color, size }) =>
               <MaterialCommunityIcons 
-              name={iconOver} 
-              size={size} 
-              color={color} 
+                name={iconOver} 
+                size={size} 
+                color={color} 
               />,
               headerRight: () => {
                 return (
                   <Button 
-                  buttonPressed={()=>navigation.navigate('AddEntry')}
-                  defaultStyle={{marginHorizontal: 18}}
+                    buttonPressed={()=>navigation.navigate('AddEntry')}
+                    defaultStyle={{marginHorizontal: 18}}
                   >
                     <MaterialCommunityIcons 
-                    name="plus" 
-                    size={18} 
-                    color={myColor.white} 
+                      name={iconAdd} 
+                      size={18} 
+                      color={myColor.white} 
                     />
                   </Button>
                 )
