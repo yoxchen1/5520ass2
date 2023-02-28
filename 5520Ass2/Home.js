@@ -1,16 +1,19 @@
 import React from 'react';
-import AllEntries from './AllEntries';
-import Button from '../components/Button';
+import Entry from './screens/Entry';
+import { StyleSheet, View, Text } from "react-native";
+import Button from './components/Button';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { myColor } from '../components/Color';
+import { myColor } from './components/Color';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useState, useEffect } from 'react';
 import { collection, onSnapshot, query } from "firebase/firestore";
-import { db } from '../Firebase/firebaseConfig';
+import { db } from './Firebase/firebaseConfig';
 
 let iconAll = 'coffee'
 let iconOver = 'alert'
 let iconAdd = 'plus'
+
+const BottomTabs = createBottomTabNavigator()
 
 export default function Home({ navigation }) {
 
@@ -43,16 +46,19 @@ export default function Home({ navigation }) {
         headerStyle: {backgroundColor:myColor.navicolor}, 
         headerTitleStyle: {color:myColor.white, fontSize: 20}, 
         headerTintColor: "#fff",
-        headerTitleAlign:"center",
+        headerTitleAlign: 'center',
         tabBarStyle: { position: 'absolute', 
         backgroundColor: myColor.navicolor },
         tabBarActiveTintColor: myColor.focus,
+        height: 65,
     }}>
         <Tab.Screen 
             name="All Entries"
-            children={() => <AllEntries entries={entries} />}
+
+            children={() => <Entry entries={entries} />}
             options={{
               title: 'All Entries', 
+              tabBarLabelStyle: { fontSize: 12 },
               tabBarIcon:({ color, size })=>
               <MaterialCommunityIcons 
               name={iconAll} 
@@ -63,9 +69,13 @@ export default function Home({ navigation }) {
                 return (
                   <Button 
                   buttonPressed={()=>navigation.navigate('AddEntry')}
-                  customizedStyle={{marginHorizontal: 18}}
+                  defaultStyle={{marginHorizontal: 18}}
                   >
-                    <MaterialCommunityIcons name="plus" size={18} color={myColor.white} />
+                    <MaterialCommunityIcons 
+                    name={iconAdd} 
+                    size={18} 
+                    color={myColor.white} 
+                    />
                   </Button>
                 )
               }
@@ -73,13 +83,14 @@ export default function Home({ navigation }) {
         <Tab.Screen 
             name="OverLimitEntries" 
             children={() => 
-              <AllEntries 
-              entries={entries.filter(item => item.warning === true)}
+              <Entry 
+              entries={entries.filter(item => item.over === true)}
               />}
             
             options={{
               title: 'Over-limit Entries', 
-              tabBarIcon:({ color, size })=><MaterialCommunityIcons 
+              tabBarIcon:({ color, size }) =>
+              <MaterialCommunityIcons 
               name={iconOver} 
               size={size} 
               color={color} 
@@ -87,12 +98,12 @@ export default function Home({ navigation }) {
               headerRight: () => {
                 return (
                   <Button 
-                    buttonPressed={()=>navigation.navigate('AddEntry')}
-                    customizedStyle={{marginHorizontal: 18}}
-                    >
+                  buttonPressed={()=>navigation.navigate('AddEntry')}
+                  defaultStyle={{marginHorizontal: 18}}
+                  >
                     <MaterialCommunityIcons 
-                    name={iconAdd} 
-                    size={24} 
+                    name="plus" 
+                    size={18} 
                     color={myColor.white} 
                     />
                   </Button>

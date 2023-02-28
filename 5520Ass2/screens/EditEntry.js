@@ -7,11 +7,20 @@ import { MaterialIcons } from '@expo/vector-icons';
 import { deleteFromDB, updateToDB } from '../Firebase/firestoreHelper';
 
 export default function EditEntry({ navigation, route }) {
+  console.log('route:',route);
+  function cancelForm() {
+    navigation.goBack()
+  }
+
   return (
-    <View style={styles.container}>
+    <View style={styles.style}>
       <Card>
-        <Text style={styles.text}>Calories: {route.params.entry.val}</Text>
-        <Text style={styles.text}>Description: {route.params.entry.name}</Text>
+        <Text style={styles.textStyle}>
+          Calories: {route.params.entry.value}
+        </Text>
+        <Text style={styles.textStyle}>
+          Description: {route.params.entry.name}
+        </Text>
         <View style={styles.buttonContainer}>
           <Button 
             buttonPressed={()=>{
@@ -20,23 +29,31 @@ export default function EditEntry({ navigation, route }) {
                 'Are you sure you want to delete this?',
                 [
                   {
-                    text: 'No',
+                    text: "No", 
+                    style: "cancel", 
+                    onPress: () => {}
                   },
                   {
                     text: 'Yes',
+                    style: "confirm",
                     onPress: () => {
                       deleteFromDB(route.params.entry.id);
-                      navigation.goBack();
+                      cancelForm();
                     },
                   },
                 ],
               );
             }}
-            customizedStyle={styles.iconButton}
+            defaultStyle={styles.iconButton}
           >
-            <MaterialIcons name="delete-outline" size={24} color={myColor.white} />
+            <MaterialIcons 
+            style={styles.button}
+            name="delete-outline" 
+            size={24} 
+            color={myColor.white} 
+            />
           </Button>
-          { route.params.entry.warning &&  
+          { route.params.entry.over &&  
           <Button 
             buttonPressed={()=>{
               Alert.alert(
@@ -44,19 +61,22 @@ export default function EditEntry({ navigation, route }) {
                 'Are you sure you want to mark this item as reviewed?',
                 [
                   {
-                    text: 'No',
+                    text: "No", 
+                    style: "cancel", 
+                    onPress: () => {}
                   },
                   {
                     text: 'Yes',
+                    style: "confirm",
                     onPress: () => {
                       updateToDB(route.params.entry.id);
-                      navigation.goBack();
+                      cancelForm();
                     },
                   },
                 ],
               );
             }}
-            customizedStyle={styles.iconButton}
+            defaultStyle={styles.iconButton}
           >
             <MaterialIcons name="check" size={24} color={myColor.white} />
           </Button> }
@@ -67,14 +87,17 @@ export default function EditEntry({ navigation, route }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  style: {
     flex: 1,
     backgroundColor: myColor.backColor,
   },
-  text: {
+  textStyle: {
     color: myColor.navicolor,
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  button: {
+    marginHorizontal: 15,
   },
   iconButton: {
     padding: 10,

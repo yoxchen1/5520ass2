@@ -1,18 +1,18 @@
-import { SafeAreaView, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import EntryList from '../components/EntryList';
 import { myColor } from '../components/Color';
 
-export default function AllEntries({ entries }) {
-
+export default function Entry({ entries }) {
+  //console.log('entires:',entries);
   return (
-    <SafeAreaView style={styles.container}>
+    <View style={styles.style}>
       <EntryList entries={entries}/>
-    </SafeAreaView>
+    </View>
   )
 }
 
 const styles = StyleSheet.create({
-  container: {
+  style: {
     flex: 1,
     backgroundColor: myColor.backColor,
   }

@@ -1,15 +1,17 @@
+import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import { StyleSheet, View, Text, Button } from "react-native";
 import Home from './Home';
-import EditEntry from './EditEntry';
-import AddEntry from './AddEntry';
-import { myColor } from '../components/Color';
+import EditEntry from './screens/EditEntry';
+import AddEntry from './screens/AddEntry';
+import { myColor } from './components/Color';
 
-const Stack = createNativeStackNavigator();
 
-export default function Navigator() {
-
+export default function App() {
+  const Stack = createNativeStackNavigator();
   return (
-    <Stack.Navigator 
+    <NavigationContainer>
+      <Stack.Navigator 
       screenOptions={{
         headerTitleStyle:{color:myColor.white, fontSize: 18}, 
         headerTintColor:myColor.white, 
@@ -30,5 +32,6 @@ export default function Navigator() {
           options={{title: 'Add Entry'}} 
         />
     </Stack.Navigator>
-  )
+    </NavigationContainer>
+  );
 }

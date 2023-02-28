@@ -20,7 +20,7 @@ async function deleteFromDB(id) {
 async function updateToDB(id) {
     try {
         await updateDoc(doc(db, "entries", id), {
-            warning: false
+            over: false
         })
     } catch (err) {
         console.log(err);

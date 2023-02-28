@@ -27,6 +27,10 @@ export default function AddEntry({ navigation }) {
     writeToDB(newEntry);
   }
 
+  function cancelForm() {
+    navigation.goBack()
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.inputContainer}>
@@ -51,24 +55,25 @@ export default function AddEntry({ navigation }) {
       </View>
 
     <View style={styles.buttonContainer}>
-        <Button 
+        <Button
           buttonPressed={()=>resetInput()}
-          customizedStyle={styles.inputButton}
+          defaultStyle={styles.inputButton}
         >
           <Text style={styles.buttonText}>Reset</Text>
         </Button>
 
         <Button 
+          defaultStyle={styles.inputButton}
           buttonPressed={()=>{
           if (valid()) {
             let over = false;
             if (value >= overNum) {
               over = true;
             }
-            const newEntry = { val: value, name: name, warning: over }
+            const newEntry = { value: value, name: name, over: over }
             updateTextEntered(newEntry);
             resetInput();
-            navigation.goBack();
+            cancelForm();
           } else {
             Alert.alert(
               'Invalid Input',
@@ -81,7 +86,6 @@ export default function AddEntry({ navigation }) {
             );
           }
           }}
-          customizedStyle={styles.inputButton}
           >
           <Text style={styles.buttonText}>Submit</Text>
         </Button>
@@ -134,5 +138,15 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     adjustContent: 'center',
     margin: 18,
+  },
+  button: {
+    marginHorizontal: 15,
+    minWidth: 100,
+  },
+  invalidInput: {
+    color: myColor.backColorlight,
+    marginTop: 25,
+    fontSize: 18,
+    alignSelf: 'center',
   }
 })
