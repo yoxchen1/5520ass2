@@ -6,4 +6,6 @@ export const myColor = {
     focus: 'rgb(240,189,87)', //darkyellow
     lost: 'rgb(142,142,123)', //gray
     backColorlight: 'rgb(173,162,255)', //lightpurpl
+    transparent: "rgb(177, 175, 255)", //lightblue+purple
+    buttonColr: "rgb(210, 230, 255)",//whietblue
 }
