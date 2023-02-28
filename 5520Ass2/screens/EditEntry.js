@@ -12,6 +12,13 @@ export default function EditEntry({ navigation, route }) {
     navigation.goBack()
   }
 
+  /**
+   * Navigate to EditEntries screen
+   * @param entries: pass the entries item to the EditEntries screen
+   */
+  function navigate(entries) {
+    navigation.navigate("EditEntries", { entriesItem: entries });
+  }
 
   return (
     <View style={styles.style}>
